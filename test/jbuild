@@ -1,3 +1,5 @@
 (library
  ((name ppx_traverse_test)
   (preprocess (pps (ppx_inline_test ppx_traverse -type-conv-keep-w32=impl)))))
+
+(jbuild_version jane_street)
