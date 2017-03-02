@@ -4,6 +4,6 @@
   (kind ppx_rewriter)
   (libraries  (ppx_core ppx_type_conv))
   (preprocess (pps (ppx_metaquot)))
-  (js_of_ocaml ())))
+))
 
 (jbuild_version jane_street)
