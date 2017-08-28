@@ -4,7 +4,7 @@
 Ppx\_traverse is a [[https://github.com/janestreet/ppx_type_conv][ppx_type_conv]] plugin generating open recursion
 classes from type definition. Users can overwrite a specific method of
 the generated classes in order to specialize the recursion on specific
-nodes. Ppx\_traverse is in particular used to generatd the open
+nodes. Ppx\_traverse is in particular used to generate the open
 recursion classes to traverse the OCaml AST in [[https://github.com/janestreet/ppx_core][ppx_core]].
 
 For instance, this is the kind of code generated (the generated code
