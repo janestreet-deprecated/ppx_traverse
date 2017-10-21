@@ -15,7 +15,7 @@ type expression =
   | Var   of string
   | Const of int
   | Add   of expression * expression
-  | If cond * expression * expression
+  | If    of cond * expression * expression
 
 and cond =
   | Cond_var   of string
