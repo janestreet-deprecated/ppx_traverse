@@ -423,7 +423,7 @@ let type_deps =
     method! core_type t acc =
       let acc =
         match t.ptyp_desc with
-        | Ptyp_constr (id, vars) -> Map.add acc ~key:id.txt ~data:(List.length vars)
+        | Ptyp_constr (id, vars) -> Map.set acc ~key:id.txt ~data:(List.length vars)
         | _ -> acc
       in
       super#core_type t acc
