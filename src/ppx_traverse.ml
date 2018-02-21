@@ -245,7 +245,7 @@ let mapper_type ~(what:what) ~loc type_name params =
         let loc = param.ptyp_loc in
         ptyp_arrow ~loc Nolabel (what#typ ~loc param) ty)
   in
-  ptyp_poly ~loc (List.map vars ~f:Loc.txt) ty
+  ptyp_poly ~loc vars ty
 ;;
 
 let constrained_mapper ~(what:what) ?(is_gadt=false) mapper td =
@@ -260,7 +260,7 @@ let constrained_mapper ~(what:what) ?(is_gadt=false) mapper td =
   in
   let typ =
     let loc = td.ptype_loc in
-    ptyp_poly ~loc (List.map vars ~f:Loc.txt) (make_type (tvars_of_vars vars))
+    ptyp_poly ~loc vars (make_type (tvars_of_vars vars))
   in
   let mapper =
     if false || is_gadt then
@@ -269,7 +269,7 @@ let constrained_mapper ~(what:what) ?(is_gadt=false) mapper td =
       in
       List.fold_right vars
         ~init:(pexp_constraint ~loc:mapper.pexp_loc mapper (make_type typs))
-        ~f:(fun v e -> pexp_newtype ~loc:v.loc v.txt e)
+        ~f:(fun v e -> pexp_newtype ~loc:v.loc v e)
     else
       mapper
   in
@@ -297,7 +297,9 @@ let rec type_expr_mapper ~(what:what) te =
     let mappers = map_variables ~what vars tes in
     what#abstract ~loc deconstruct (what#combine ~loc mappers ~reconstruct)
   | Ptyp_constr (path, params) ->
-    let map = pexp_send ~loc (evar ~loc "self") (method_name path.txt) in
+    let map =
+      pexp_send ~loc (evar ~loc "self") { txt = method_name path.txt; loc = path.loc; }
+    in
     (match params with
      | [] -> map
      | _  ->
@@ -449,7 +451,7 @@ let lift_virtual_methods ~loc methods =
 
     method! expression_desc x acc =
       match x with
-      | Pexp_send (_, ("tuple"|"record"|"constr"|"other" as s)) -> Set.add acc s
+      | Pexp_send (_, ({ txt = "tuple"|"record"|"constr"|"other" as s; loc = _; })) -> Set.add acc s
       | _ -> super#expression_desc x acc
   end in
   let used = collect#list collect#class_field methods (Set.empty (module String)) in
