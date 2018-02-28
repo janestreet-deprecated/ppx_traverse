@@ -3,8 +3,8 @@
   (public_name ppx_traverse)
   (kind ppx_rewriter)
   (flags (:standard -safe-string))
-  (libraries  (ppx_core ppx_type_conv))
-  (preprocess (pps (ppx_metaquot ppx_driver.runner)))
+  (libraries  (ppxlib.traverse))
+  (preprocess no_preprocessing)
 ))
 
 (jbuild_version 1)
