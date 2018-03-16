@@ -1,5 +1,5 @@
 #+TITLE: ppx-traverse
-#+PARENT: ../README.md
+#+PARENT: ../../README.md
 
 Ppx\_traverse is a [[https://github.com/janestreet/ppx_type_conv][ppx_type_conv]] plugin generating open recursion
 classes from type definition. Users can overwrite a specific method of
